@@ -12,6 +12,14 @@ def get_all_tasks():
     return out
 
 
+@app.get("/tasks/<int:pk>")
+def get_one_task(pk):
+    out = {}
+    response = task.select_by_id(pk)
+    out["task"] = response[0]
+    return out
+
+
 @app.post("/tasks")
 def create_task():
     out = {"status": "ok"}

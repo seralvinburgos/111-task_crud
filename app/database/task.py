@@ -17,10 +17,24 @@ def output_formatter(results):
 
 def scan():
     conn = get_db()
-    cursor = conn.execute("SELECT * FROM task WHERE active=1", ())
+    cursor = conn.execute(
+            "SELECT * FROM task WHERE active=1",
+            ()
+    )
     results = cursor.fetchall()
     cursor.close()
     return output_formatter(results) 
+
+
+def select_by_id(pk):
+    conn = get_db()
+    cursor = conn.execute(
+            "SELECT * FROM task WHERE id=?",
+            (pk,)
+    )
+    results = cursor.fetchall()
+    cursor.close()
+    return output_formatter(results)
 
 
 def insert(raw_data):
@@ -67,7 +81,7 @@ def update(pk, raw_data):
 def delete(pk):
     conn = get_db()
     conn.execute(
-            "DELETE FROM task WHERE id = "?", 
+            "DELETE FROM task WHERE id =?", 
             (pk, )
     )
     conn.commit()
