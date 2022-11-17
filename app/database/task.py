@@ -66,7 +66,7 @@ def update(pk, raw_data):
         pk
     )
     statement = """
-        UPDATE task (
+        UPDATE task 
         SET title = ?,
             subtitle = ?,
             body = ?
